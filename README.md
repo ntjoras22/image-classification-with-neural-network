@@ -106,36 +106,49 @@ pip install opencv-python numpy matplotlib tensorflow
 
 ## 💻 Usage
 
-### Training the Model
+### Training the Model (Recommended First Step)
 
-Run the script to load data, train the model, and save it:
+To train the CNN model from scratch, use `model.py`:
+
+```bash
+python model.py
+```
+
+This script will:
+
+1. Load and preprocess the CIFAR-10 dataset
+2. Build the CNN model with convolutional layers
+3. Compile the model with Adam optimizer
+4. Train on 10,000 training samples for 10 epochs
+5. Evaluate on 4,000 test samples
+6. Display training accuracy and loss metrics
+7. Save the trained model as `image_classification.keras`
+
+**Training time**: ~5-10 minutes depending on your system
+
+### Making Predictions on Custom Images
+
+Once the model is trained, use `main.py` to make predictions:
 
 ```bash
 python main.py
 ```
 
-This will:
+This script will:
 
-1. Load the CIFAR-10 dataset
-2. Display 16 sample images with their labels
-3. Build and train the CNN model
-4. Save the trained model as `image_classification.keras`
+1. Display 16 sample CIFAR-10 images with labels
+2. Load your trained model
+3. Load and classify a custom image from `sample_images/` folder
+4. Display the image and predicted class name
 
-### Predicting on Custom Images
+**To test with your own image:**
 
-The script includes a prediction section. To classify your own image:
-
-1. Place your image in the project folder (e.g., `deer.jpg`)
+1. Place your image in the `sample_images/` folder (e.g., `deer.jpg`)
 2. Update the filename in `main.py`:
    ```python
-   img = cv.imread('your_image.jpg')
+   img = cv.imread('sample_images/your_image.jpg')
    ```
-3. Run the script:
-   ```bash
-   python main.py
-   ```
-
-The script will display your image and print the predicted class.
+3. Run: `python main.py`
 
 ---
 
@@ -144,12 +157,17 @@ The script will display your image and print the predicted class.
 ```
 image_classification/
 │
-├── main.py                          # Main script for training and inference
-├── image_classification.keras       # Trained model (generated after running)
+├── main.py                          # Inference script for predictions on custom images
+├── model.py                         # Training script to train/retrain the model
+├── image_classification.keras       # Trained model (generated after running model.py)
+├── sample_images/                   # Folder for custom test images
+│   ├── plane.jpg
+│   ├── deer.jpg
+│   └── ...
 ├── requirements.txt                 # Python dependencies
 ├── .gitignore                       # Git ignore file
 ├── README.md                        # This file
-└── sample_images/                   # (Optional) Folder for custom images
+└── venv/                            # Virtual environment folder
 ```
 
 ---
